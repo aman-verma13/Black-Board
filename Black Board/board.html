@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board {
+            height: 50vh;
+            width: 50%;
+            background-color: black;
+            color: white;
+        }
+
+        .frow {
+            display: flex;
+        }
+
+        #sel {
+            padding: 2vh;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div style="display: flex; justify-content: space-between;" class="frow">
+            <div>
+                <button id="btn" onclick="raise()">
+                    <img src="./download (1).png" width="100px" height="100px" alt="">
+                </button>
+            </div>
+            <div style="width: 50%;">
+                <textarea name="ta" disabled id="write" style="resize: none; width: 100%; height: 50vh;"></textarea>
+            </div>
+            <div>
+                <select name="sl" onchange="changeC(this.value)" id="sel">
+                    <option value="">select board color</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="purple">purple</option>
+                </select>
+
+                <select name="sl" onchange="fontS(this.value)" id="sel">
+                    <option value="">select font size</option>
+                    <option value="10px">10px</option>
+                    <option value="20px">20px</option>
+                    <option value="30px">30px</option>
+                    <option value="40px">40px</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: flex;">
+            <div style="margin-top: 5vh;">
+                <textarea name="ta" id="" aria-multiline="true" onkeyup="typing(this.value)"
+                    placeholder="Enter something" cols="80" rows="10"></textarea>
+            </div>
+            <div>
+                <textarea disabled name="" id="list" cols="70" rows="20"></textarea>
+            </div>
+            <button onclick="replybtn()">Reply</button>
+        </div>
+
+    </div>
+
+    <script>
+        let que = null
+        let ans = null
+        const typing = (text) => {
+            document.getElementById('write').innerText = text
+        }
+
+        function changeC(color) {
+            document.getElementById('write').style.backgroundColor = color
+        }
+
+        const fontS = (size) => {
+            document.getElementById('write').style.fontSize = size
+        }
+
+        const raise = () => {
+            if (que != null && que != '') {
+                return false
+            } else {
+                que = prompt('Enter Your Question')
+            }
+
+            if (que != null && que != '') {
+                document.getElementById('list').innerHTML += "Que. " + que
+            }
+        }
+
+        function replybtn() {
+            if (que != null && que != '') {
+                ans = prompt(que)
+                if (ans != null && ans != '') [
+                    document.getElementById('list').innerHTML += "\n" + "Ans. " + ans + "\n\n",
+                    que = null
+                ]
+            }
+        }
+    </script>
+</body>
+
+</html>
